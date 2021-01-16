@@ -47,18 +47,20 @@ class TodoCard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Center(
-                            child: Text(
-                              title,
-                              style: TextStyle(
-                                color: isFinished
-                                    ? Colors.grey[400]
-                                    : Colors.white,
-                                fontWeight: isFinished ? null : FontWeight.bold,
-                                fontSize: 20,
-                                decoration: isFinished
-                                    ? TextDecoration.lineThrough
-                                    : TextDecoration.none,
+                          Expanded(
+                                                      child: Center(
+                              child: Text(                              
+                                title,
+                                style: TextStyle(                                
+                                  color: isFinished
+                                      ? Colors.grey[400]
+                                      : Colors.white,
+                                  fontWeight: isFinished ? null : FontWeight.bold,
+                                  fontSize: 20,
+                                  decoration: isFinished
+                                      ? TextDecoration.lineThrough
+                                      : TextDecoration.none,
+                                ),
                               ),
                             ),
                           ),

@@ -3,29 +3,44 @@ import 'package:flutter_todo_list_app/Api/const.dart';
 
 class Api {
   //getAllTodo
-  static Future getTodos() {
-    return http.get(url + 'getAllTodos');
+  static Future getTodos() async {
+    try {
+      return await http.get(url + 'getAllTodos');
+    } catch (e) {
+      print(e);
+    }
   }
 
 //delete Todo
-  static Future deleteTodo(String id) {
+  static Future deleteTodo(String id) async {
     String json = '{"id" : "$id"}';
-
-    return http.post(url + 'deleteTodo',
-        body: json, headers: {"Content-type": "application/json"});
+    try {
+      return await http.post(url + 'deleteTodo',
+          body: json, headers: {"Content-type": "application/json"});
+    } catch (e) {
+      print(e);
+    }
   }
 
 //update todo
-  static Future updateTodo(String id, bool value) {
+  static Future updateTodo(String id, bool value) async {
     String json = '{"id" : "$id", "isFinished":"$value"}';
-    return http.post(url + 'updateTodo',
-        body: json, headers: {"Content-type": "application/json"});
+    try {
+      return await http.post(url + 'updateTodo',
+          body: json, headers: {"Content-type": "application/json"});
+    } catch (e) {
+      print(e);
+    }
   }
 
 //add todo
-  static Future addTodo(String title) {
+  static Future addTodo(String title) async {
     String json = '{"title":"$title"}';
-    return http.post(url + 'addTodo',
-        body: json, headers: {"Content-type": "application/json"});
+    try {
+      return await http.post(url + 'addTodo',
+          body: json, headers: {"Content-type": "application/json"});
+    } catch (e) {
+      print(e);
+    }
   }
 }

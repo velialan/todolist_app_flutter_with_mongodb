@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
 
 //get todo
   getTodo() {
-    Api.getTodos().then((response) {
+
+    try {
+         Api.getTodos().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
         // print(list);
@@ -38,6 +40,10 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
         // });
       });
     });
+    } catch (e) {
+      print(e);
+    }
+ 
   }
 
 //delete todo
@@ -56,6 +62,7 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
     getTodo();
   }
 
+//add Todo
   addTodo() {
     Api.addTodo(todonameTxt).then((response) {
       _controller.clear();
@@ -90,8 +97,8 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
             onDismissed: (direction) {
               deleteTodo(todo[position].id,todo[position].title);
             },
-            background: slideLeftBackground(),
-            secondaryBackground: slideRightBackground(),
+            background: slideBackground(),
+            secondaryBackground: slideBackground(),
             key: UniqueKey(),
             child: TodoCard(
               title: todo[position].title,
@@ -176,7 +183,7 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
   }
 }
 
-Widget slideLeftBackground() {
+Widget slideBackground() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -211,37 +218,3 @@ Widget slideLeftBackground() {
   );
 }
 
-Widget slideRightBackground() {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.red[400],
-      ),
-      child: Align(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              width: 20,
-            ),
-            Icon(
-              Icons.delete,
-              color: Colors.white,
-            ),
-            Text(
-              " Sil",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.right,
-            ),
-          ],
-        ),
-        alignment: Alignment.centerLeft,
-      ),
-    ),
-  );
-}
