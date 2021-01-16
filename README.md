@@ -1,4 +1,4 @@
-# A simple to do list project
+# A simple To Do List project
 It is a project where you can simply list your todos.
 
 Mongodb used on backend side
