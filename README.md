@@ -4,6 +4,7 @@ It is a project where you can simply list your todos.
 Mongodb used on backend side
 
 #  Getting Started
+    git clone https://github.com/velialan/todolist_app_flutter_with_mongodb.git
     cd backend
     npm install
     npm start
