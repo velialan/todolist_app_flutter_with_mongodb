@@ -8,7 +8,7 @@ Mongodb used on backend side
     npm install
     npm start
     
-default port 3001(server.js and lib/Api/const.dart) 
+default port 3001(backend/server.js and flutter_todo_list_app/lib/Api/const.dart) 
 
     cd flutter_todo_list_app
     flutter pub get
