@@ -25,50 +25,62 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
 
 //get todo
   getTodo() {
-
     try {
-         Api.getTodos().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        // print(list);
-        this.todo = list.map((todos) => Todo.fromJson(todos)).toList();
-        //en son eklenen en başta gözükecekse
-        // this.todo.sort((a, b) {
-        //   var adate = a.date;
-        //   var bdate = b.date;
-        //   return -adate.compareTo(bdate);
-        // });
+      Api.getTodos().then((response) {
+        setState(() {
+          Iterable list = json.decode(response.body);
+          // print(list);
+          this.todo = list.map((todos) => Todo.fromJson(todos)).toList();
+          //en son eklenen en başta gözükecekse
+          // this.todo.sort((a, b) {
+          //   var adate = a.date;
+          //   var bdate = b.date;
+          //   return -adate.compareTo(bdate);
+          // });
+        });
       });
-    });
     } catch (e) {
       print(e);
     }
- 
   }
 
 //delete todo
-  deleteTodo(_id,title) {
-    Api.deleteTodo(_id).then((response) {
-      toast(title+" Görevi Silindi");
-    });
-    getTodo();
+  deleteTodo(_id, title) {
+    try {
+      Api.deleteTodo(_id).then((response) {
+        toast(title + " Görevi Silindi");
+      });
+      getTodo();
+    } catch (e) {
+      print(e);
+    }
   }
 
   //update todo
-  updateTodo(_id, isfinished,title) {
-    Api.updateTodo(_id, isfinished).then((response) {
-      isfinished ? toast(title+" Görevi Tamamlandı") : toast(title+" Görevi geri alındı");
-    });
-    getTodo();
+  updateTodo(_id, isfinished, title) {
+    try {
+      Api.updateTodo(_id, isfinished).then((response) {
+        isfinished
+            ? toast(title + " Görevi Tamamlandı")
+            : toast(title + " Görevi geri alındı");
+      });
+      getTodo();
+    } catch (e) {
+      print(e);
+    }
   }
 
 //add Todo
   addTodo() {
-    Api.addTodo(todonameTxt).then((response) {
-      _controller.clear();
-      toast("Görev Eklendi.");
-    });
-    getTodo();
+    try {
+      Api.addTodo(todonameTxt).then((response) {
+        _controller.clear();
+        toast("Görev Eklendi.");
+      });
+      getTodo();
+    } catch (e) {
+      print(e);
+    }
   }
 
 //toast method
@@ -95,7 +107,7 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
         itemBuilder: (context, position) {
           return Dismissible(
             onDismissed: (direction) {
-              deleteTodo(todo[position].id,todo[position].title);
+              deleteTodo(todo[position].id, todo[position].title);
             },
             background: slideBackground(),
             secondaryBackground: slideBackground(),
@@ -105,7 +117,7 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
               date: todo[position].date,
               isFinished: todo[position].isFinished,
               function: (isfinished) {
-                updateTodo(todo[position].id, isfinished,todo[position].title);
+                updateTodo(todo[position].id, isfinished, todo[position].title);
               },
             ),
           );
@@ -217,4 +229,3 @@ Widget slideBackground() {
     ),
   );
 }
-
